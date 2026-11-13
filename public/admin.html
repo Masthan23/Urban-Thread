@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f2f0e9">
+    <title>Store Studio — Urban Thread</title>
+    <style>
+        :root { --paper: #f2f0e9; --ink: #20231e; --muted: #77796f; --line: #d9d7ce; --accent: #d84f32; --white: #fbfaf6; }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+        a { color: inherit; text-decoration: none; }
+        .announcement { padding: 10px 20px; background: var(--ink); color: var(--paper); text-align: center; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+        .container { max-width: 1180px; margin: auto; padding: 0 28px 70px; }
+        header { min-height: 84px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+        .brand { font-size: 20px; font-weight: 900; letter-spacing: -.08em; }
+        .brand span { color: var(--accent); }
+        .back-link { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+        .page-intro { padding: 42px 0 30px; }
+        .eyebrow { color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+        h1 { margin: 10px 0; font-size: clamp(38px, 6vw, 68px); letter-spacing: -.08em; text-transform: uppercase; }
+        .page-intro p { margin: 0; color: var(--muted); font-size: 14px; }
+        .panel { margin-top: 24px; padding: 28px; background: var(--white); }
+        .panel-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 22px; }
+        h2 { margin: 0; font-size: 19px; letter-spacing: -.04em; text-transform: uppercase; }
+        .panel-heading span { color: var(--muted); font-size: 11px; }
+        .form-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+        .field { display: flex; flex-direction: column; gap: 7px; }
+        .field.wide { grid-column: span 2; }
+        label { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+        input { width: 100%; min-width: 0; padding: 12px 13px; border: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--ink); font: inherit; font-size: 13px; }
+        input:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+        .hint { margin: 14px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+        button { cursor: pointer; font-family: inherit; }
+        .primary-button { align-self: end; min-height: 42px; padding: 12px 18px; border: 1px solid var(--ink); background: var(--ink); color: white; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+        .primary-button:hover { background: var(--accent); border-color: var(--accent); }
+        .table-wrap { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { padding: 12px 10px; border-bottom: 1px solid var(--ink); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
+        td { padding: 13px 10px; border-bottom: 1px solid var(--line); font-size: 12px; }
+        td input { min-width: 80px; padding: 8px; }
+        .product-name { min-width: 180px; font-weight: 700; }
+        .actions { min-width: 170px; white-space: nowrap; }
+        .save-button, .delete-button { padding: 9px 10px; border: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+        .save-button:hover { background: var(--ink); color: white; }
+        .delete-button { margin-left: 5px; border-color: var(--accent); color: var(--accent); }
+        .delete-button:hover { background: var(--accent); color: white; }
+        .message-row { padding: 22px 10px; color: var(--muted); font-size: 13px; }
+        @media (max-width: 700px) {
+            .container { padding: 0 16px 45px; }
+            header { min-height: 70px; }
+            .form-grid { grid-template-columns: 1fr 1fr; }
+            .field.wide { grid-column: span 2; }
+            .panel { padding: 20px 15px; }
+        }
+        @media (max-width: 440px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .field.wide { grid-column: auto; }
+            .panel-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="announcement">Urban Thread / Store studio</div>
+    <div class="container">
+        <header>
+            <a class="brand" href="customer.html">URBAN<span>.</span>THREAD</a>
+            <a class="back-link" href="customer.html">← Back to storefront</a>
+        </header>
+
+        <main>
+            <section class="page-intro">
+                <div class="eyebrow">Your shop, your rules</div>
+                <h1>Store studio.</h1>
+                <p>Add new pieces, keep stock current, and curate your collection.</p>
+            </section>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <h2>Add a new piece</h2>
+                    <span>New products appear on the storefront immediately.</span>
+                </div>
+                <form id="add-form" class="form-grid">
+                    <div class="field">
+                        <label for="new-name">Product name</label>
+                        <input type="text" id="new-name" placeholder="e.g. Heavyweight Boxy Tee" required>
+                    </div>
+                    <div class="field">
+                        <label for="new-price">Price (₹)</label>
+                        <input type="number" id="new-price" min="0.01" step="0.01" placeholder="799" required>
+                    </div>
+                    <div class="field">
+                        <label for="new-qty">Stock quantity</label>
+                        <input type="number" id="new-qty" min="0" step="1" placeholder="12" required>
+                    </div>
+                    <div class="field wide">
+                        <label for="new-img">Image URL</label>
+                        <input type="url" id="new-img" placeholder="Direct image URL or Google Drive share link">
+                    </div>
+                    <div class="field">
+                        <label for="new-description">Description</label>
+                        <input type="text" id="new-description" placeholder="Fit, fabric, or details">
+                    </div>
+                    <button class="primary-button" type="submit">＋ Add piece</button>
+                </form>
+                <p class="hint">Google Drive image? Set General access to “Anyone with the link” so customers can view it.</p>
+            </section>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <h2>Manage collection</h2>
+                    <span>Save price or stock changes, or remove a product.</span>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Piece</th>
+                                <th>Price (₹)</th>
+                                <th>In stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table">
+                            <tr><td class="message-row" colspan="5">Loading your collection…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = window.location.port === '3000'
+            ? ''
+            : `http://${window.location.hostname || 'localhost'}:3000`;
+
+        async function loadAdminData() {
+            const tbody = document.getElementById('admin-table');
+            try {
+                const response = await fetch(`${API_BASE}/api/products`);
+                if (!response.ok) throw new Error(`Product list request failed (HTTP ${response.status}).`);
+                const products = await response.json();
+                tbody.replaceChildren();
+
+                if (products.length === 0) {
+                    tbody.innerHTML = '<tr><td class="message-row" colspan="5">No products yet. Add your first piece above.</td></tr>';
+                    return;
+                }
+
+                products.forEach(product => {
+                    const row = document.createElement('tr');
+                    const id = document.createElement('td');
+                    id.textContent = `#${product.id}`;
+                    const name = document.createElement('td');
+                    name.className = 'product-name';
+                    name.textContent = product.name;
+                    const priceCell = document.createElement('td');
+                    const price = document.createElement('input');
+                    price.type = 'number';
+                    price.min = '0.01';
+                    price.step = '0.01';
+                    price.id = `price-${product.id}`;
+                    price.value = product.price;
+                    price.setAttribute('aria-label', `Price for ${product.name}`);
+                    priceCell.appendChild(price);
+                    const quantityCell = document.createElement('td');
+                    const quantity = document.createElement('input');
+                    quantity.type = 'number';
+                    quantity.min = '0';
+                    quantity.step = '1';
+                    quantity.id = `qty-${product.id}`;
+                    quantity.value = product.quantity;
+                    quantity.setAttribute('aria-label', `Stock quantity for ${product.name}`);
+                    quantityCell.appendChild(quantity);
+                    const actions = document.createElement('td');
+                    actions.className = 'actions';
+                    const saveButton = document.createElement('button');
+                    saveButton.className = 'save-button';
+                    saveButton.textContent = 'Save';
+                    saveButton.addEventListener('click', () => updateProduct(product.id));
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'delete-button';
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.addEventListener('click', () => deleteProduct(product.id, product.name));
+                    actions.append(saveButton, deleteButton);
+                    row.append(id, name, priceCell, quantityCell, actions);
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Could not load products:', error);
+                tbody.innerHTML = '<tr><td class="message-row" colspan="5">Cannot reach the store API. Start it with <code>npm start</code>, then open <a href="http://localhost:3000/admin.html">the admin page on port 3000</a>.</td></tr>';
+            }
+        }
+
+        document.getElementById('add-form').addEventListener('submit', async event => {
+            event.preventDefault();
+            const product = {
+                name: document.getElementById('new-name').value.trim(),
+                price: Number(document.getElementById('new-price').value),
+                quantity: Number(document.getElementById('new-qty').value),
+                image: document.getElementById('new-img').value.trim(),
+                description: document.getElementById('new-description').value.trim()
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/api/products`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(product)
+                });
+                if (!response.ok) {
+                    const details = await response.json().catch(() => ({}));
+                    throw new Error(details.error || `The server returned HTTP ${response.status}.`);
+                }
+                event.target.reset();
+                await loadAdminData();
+            } catch (error) {
+                console.error('Could not add product:', error);
+                alert(`Could not add the product: ${error.message}`);
+            }
+        });
+
+        async function updateProduct(id) {
+            const price = Number(document.getElementById(`price-${id}`).value);
+            const quantity = Number(document.getElementById(`qty-${id}`).value);
+            if (!Number.isFinite(price) || price <= 0 || !Number.isInteger(quantity) || quantity < 0) {
+                alert('Enter a price greater than zero and a whole stock quantity of zero or more.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/products/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ price, quantity })
+                });
+                if (!response.ok) throw new Error(`The server returned HTTP ${response.status}.`);
+                await loadAdminData();
+            } catch (error) {
+                console.error('Could not update product:', error);
+                alert(`Could not update the product: ${error.message}`);
+            }
+        }
+
+        async function deleteProduct(id, name) {
+            if (!confirm(`Delete "${name}" from the collection? This cannot be undone.`)) return;
+            try {
+                const response = await fetch(`${API_BASE}/api/products/${id}`, { method: 'DELETE' });
+                if (!response.ok) {
+                    const details = await response.json().catch(() => ({}));
+                    throw new Error(details.error || `The server returned HTTP ${response.status}.`);
+                }
+                await loadAdminData();
+            } catch (error) {
+                console.error('Could not delete product:', error);
+                alert(`Could not delete the product: ${error.message}`);
+            }
+        }
+
+        loadAdminData();
+    </script>
+</body>
+</html>
